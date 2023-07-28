@@ -1,4 +1,8 @@
 "use strict";
+document.querySelector('form').addEventListener('submit',(event) => {
+    event.preventDefault();
+});
+document.querySelector('form').addEventListener('submit',Get_Transactions)
 
 let api_key = "2BNG5GUPKQEDS4WY3G4T77F4RA1VUCE6CF";
 let base_url = "https://api.etherscan.io/api";
@@ -31,13 +35,13 @@ async function Get_Transactions() {
       //console.log(`receiver is ${reciever}`);
 
       if(sender.toLowerCase() === address.toLowerCase()) {
-        console.log(`Mito sent ${value} to ${sender}`)
+        const trade = `<tr>Mito sent ${value} to ${sender}</tr>`
+        document.querySelector('table').insertAdjacentHTML('beforeend',trade)
       } else {
-        console.log(`Mito recieved ${value} from ${reciever}`)
+        const trade = `<tr>Mito recieved ${value} from ${reciever}</tr>`
+        document.querySelector('table').insertAdjacentHTML('beforeend',trade)
       }
 
     }
   });
 }
-
-Get_Transactions();
