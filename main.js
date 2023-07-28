@@ -3,21 +3,30 @@
 let api_key = "2BNG5GUPKQEDS4WY3G4T77F4RA1VUCE6CF";
 let base_url = "https://api.etherscan.io/api";
 let address = "0x48e3E4F95CE13fe5427D1c45DC40202c1F614F67";
-
 let url = `https://api.etherscan.io/api
 ?module=account
-&action=tokentx
-&contractaddress=0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2
+&action=txlist
 &address=${address}
 &page=1
-&offset=100
+&offset=10000
 &startblock=0
-&endblock=27025780
-&sort=asc
+&endblock=99999999
+&sort=desc
 &apikey=${api_key}`;
 
-url = `https://api.etherscan.io/api?module=account&action=balance&address=${address}&tag=latest&apikey=${api_key}`
+async function Get_Transactions() {
+  const response = await fetch(url);
+  const data = await response.json();
+  const transactions = data.result;
 
-console.log(url)
+  transactions.forEach(transaction => {
+    let value = parseInt(transaction.value)
+    if(value !== 0){
+        value = value/1000000000000000;
+        value = value/1000;
+        console.log(value)
+    }
+  });
+}
 
-//fetch(url);
+Get_Transactions();
