@@ -19,7 +19,7 @@ function Get_Transactions() {
           //remove the eth part and dynamic cast into float
           eth_amount = parseFloat(eth_amount.slice(0, -3).replace(/,/g, ""));
           //Print only eth Transactions
-          if(eth_amount > 1) console.log(eth_amount);
+          if (eth_amount > 1) console.log(eth_amount);
         });
       } else {
         //if error happens let me know the status code
@@ -54,7 +54,22 @@ function Get_Transactions_Account() {
           .text();
 
         if (eth_amount > 0) {
-          console.log(`${eth_amount} moved`);
+          let sender = $(el)
+            .closest("tr")
+            .find("td:nth-child(8) > div")
+            .text()
+            .slice(-11)
+            .toLowerCase();
+
+          //FIX HERE
+          let send = sender;
+          let add = address.slice(-8).toLowerCase()
+          if (send === add.slice(-8).toLowerCase()) {
+            console.log(`SENT ${eth_amount}`);
+          } else {
+            console.log(`Recieved ${eth_amount}`);
+          }
+          //TO HERE
         } else {
           let action = $(el)
             .closest("tr")
@@ -124,13 +139,12 @@ function Get_Hash_Details(hash) {
   });
 }
 
-Get_Transactions();
+
+//Get_Transactions();
 //Get_Transactions_Account();
 //Get_Hash_Details(hash)
 
 //---------------------TO DO---------------------
-//How to bypass the fucking cors and cloudfare
-//i think cloudfare is blocking the known proxies
-//Put A coin name and it Tracks it's transactions
+//FIX THE RECIEVED AND SENT MESSAGE FOR NORMAL ETH ACCOUN TRANSACTIONS
 
 //---------------------ADVANCED FILTER REQUIRES CLOUDFARE BYBASS---------------------
