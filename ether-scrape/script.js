@@ -1,13 +1,14 @@
-import fs from "fs";
+import {writeFile , fs} from "fs";
 
-let address = document.querySelector('form').addEventListener('submit' , Get_Address)
-
-function Get_Address() {
-    let add = document.querySelector('#wallet').value
-    if(add) return add;
+document.querySelector('form').addEventListener('submit',make)
+document.querySelector('form').addEventListener('submit',(e) => {
+    e.preventDefault()
+})
+let address = "zeby"
+function make() {
+    fs.writeFile('test.txt', address ,(err) => {
+        if(err) console.error(err)
+        console.log(address)
+    })
 }
 
-fs.writeFile('test.txt', address ,(err) => {
-    if(err) console.error(err)
-    console.log(address)
-})
