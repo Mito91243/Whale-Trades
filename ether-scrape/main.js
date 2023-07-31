@@ -75,7 +75,7 @@ function Get_Transactions_Account() {
             .closest("tr")
             .find("td:nth-child(3) > span")
             .text();
-          if (eth_amount === 0) {
+          if (eth_amount === 0 && action !== 'Transfer') {
             Get_Hash_Details(transaction_hash);
           }
         }
