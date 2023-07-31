@@ -99,7 +99,7 @@ function Get_Hash_Details(hash) {
         "span.d-inline-flex.flex-wrap.align-items-center > #tokenpricebutton"
       ).each((i, el) => {
         //Get The Value
-        let alt_value = $(el).text();
+        let alt_value = $(el).text().slice(1).replace(/,/g, "");
 
         //IN THE SAME DIV I NEED TO GET THE ALT
         let alt_amount = $(el)
@@ -108,6 +108,7 @@ function Get_Hash_Details(hash) {
           .text()
           .replace(/,/g, "");
 
+          alt_amount = parseInt(alt_amount)
         //Get The Token
         let token = $(el)
           .closest("span.d-inline-flex.flex-wrap.align-items-center")
@@ -128,11 +129,11 @@ function Get_Hash_Details(hash) {
         //LOGGING TO SCREEN The Details
         if (sender.toLowerCase() === address.toLowerCase()) {
           console.log(
-            `SENT ${alt_amount} ${token} with value of ${alt_value} to ${reciever}`
+            `SENT ${alt_amount} ${token} with value of ${alt_value}`
           );
         } else {
           console.log(
-            `Recieved ${alt_amount} ${token} with value of ${alt_value} from ${sender}`
+            `Recieved ${alt_amount} ${token} with value of ${alt_value}`
           );
         }
       });
@@ -144,7 +145,8 @@ function Get_Hash_Details(hash) {
         'div > span.d-inline-flex.flex-wrap.align-items-center > span.text-muted.me-1'
       ).each((i, el) => {
         //Get The Value
-        let alt_value = $(el).text();
+        let alt_value = $(el).text().slice(2).slice(0,-1).replace(/,/g, "");
+        alt_value = parseInt(alt_value)
 
         //IN THE SAME DIV I NEED TO GET THE ALT
         let alt_amount = $(el)
@@ -173,11 +175,11 @@ function Get_Hash_Details(hash) {
         //LOGGING TO SCREEN The Details
         if (sender.toLowerCase() === address.toLowerCase()) {
           console.log(
-            `SENT ${alt_amount} ${token} with value of ${alt_value} to ${reciever}`
+            `SENT ${alt_amount} ${token} with value of ${alt_value}`
           );
         } else {
           console.log(
-            `Recieved ${alt_amount} ${token} with value of ${alt_value} from ${sender}`
+            `Recieved ${alt_amount} ${token} with value of ${alt_value}`
           );
         }
       });
