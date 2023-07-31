@@ -2,7 +2,7 @@
 import axios from "axios";
 import cheerio from "cheerio";
 
-let address = "0x6Ec21d1868743a44318c3C259a6d4953F9978538";
+let address = " 0x000f7f22bfC28D940d4B68e13213aB17cf107790";
 
 function Get_Transactions() {
   axios
@@ -99,7 +99,9 @@ function Get_Hash_Details(hash) {
         "span.d-inline-flex.flex-wrap.align-items-center > #tokenpricebutton"
       ).each((i, el) => {
         //Get The Value
-        let alt_value = $(el).text().slice(1).replace(/,/g, "");
+        let alt_value_filter;
+        let alt_value = $(el).text();
+        alt_value_filter = parseInt(alt_value.slice(1).replace(/,/g, ""))
 
         //IN THE SAME DIV I NEED TO GET THE ALT
         let alt_amount = $(el)
@@ -145,8 +147,9 @@ function Get_Hash_Details(hash) {
         'div > span.d-inline-flex.flex-wrap.align-items-center > span.text-muted.me-1'
       ).each((i, el) => {
         //Get The Value
-        let alt_value = $(el).text().slice(2).slice(0,-1).replace(/,/g, "");
-        alt_value = parseInt(alt_value)
+        let alt_value_filter;
+        let alt_value = $(el).text();
+        alt_value_filter = parseInt(alt_value.slice(2).slice(0,-1).replace(/,/g, ""))
 
         //IN THE SAME DIV I NEED TO GET THE ALT
         let alt_amount = $(el)
